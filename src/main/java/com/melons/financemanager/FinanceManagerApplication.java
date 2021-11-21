@@ -1,8 +1,5 @@
 package com.melons.financemanager;
 
-import com.melons.financemanager.service.UserService;
-import com.melons.financemanager.service.dto.UserDto;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

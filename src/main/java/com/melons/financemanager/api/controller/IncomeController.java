@@ -1,24 +1,28 @@
 package com.melons.financemanager.api.controller;
 
-import com.melons.financemanager.model.Income;
 import com.melons.financemanager.service.IncomeService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.melons.financemanager.service.dto.IncomeDto;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequestMapping("/incomes")
+@AllArgsConstructor
 public class IncomeController {
 
-    private IncomeService incomeService;
+    private final IncomeService incomeService;
 
-    public IncomeController(IncomeService incomeService) {
-        this.incomeService = incomeService;
-    }
 
     @PostMapping
-    public Income create(@RequestBody Income income) {
-        return incomeService.create(income);
+    public IncomeDto create(@RequestBody IncomeDto incomeDto, Principal principal) {
+        return incomeService.create(incomeDto, principal.getName());
+    }
+
+    @GetMapping
+    public List<IncomeDto> getByUser(Principal principal) {
+        return incomeService.getByUser(principal.getName());
     }
 }
