@@ -1,6 +1,7 @@
 package com.melons.financemanager.service;
 
 import com.melons.financemanager.model.Category;
+import com.melons.financemanager.model.Currency;
 import com.melons.financemanager.model.Expense;
 import com.melons.financemanager.model.User;
 import com.melons.financemanager.repository.CategoryRepository;
@@ -38,9 +39,12 @@ public class ExpenseService {
         User user = userRepository.findByUsername(username);
         expenseDto.setDate(LocalDateTime.now());
         Expense expense = expenseDto.toExpense();
-        expense.setCurrency(currencyRepository.findByName(expenseDto.getCurrency()));
+        Currency currency = new Currency();
+        currency.setName(expenseDto.getCurrency());
+        expense.setCurrency(currencyRepository.save(currency));
         expense.setUser(user);
-        Category category = categoryRepository.findByName(expenseDto.getCategory());
+        Category category = new Category();
+        categoryRepository.save(category);
         expense.setCategory(category);
         return ExpenseDto.fromExpense(expenseRepository.save(expense));
     }

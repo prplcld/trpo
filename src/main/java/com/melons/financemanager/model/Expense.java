@@ -21,13 +21,14 @@ public class Expense {
     private LocalDateTime date;
 
     @ManyToOne
-    @JoinColumn(name = "currency_id")
-    private Currency currency;
-
-    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "currency_id")
+    private Currency currency;
 }

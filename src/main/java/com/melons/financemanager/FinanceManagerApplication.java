@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableJpaRepositories(basePackages = "com.melons.financemanager")
 @SpringBootApplication
 public class FinanceManagerApplication {
+
 	public static void main(String[] args) {
 		SpringApplication.run(FinanceManagerApplication.class, args);
 	}
@@ -20,6 +21,5 @@ public class FinanceManagerApplication {
 	BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
 }
 
