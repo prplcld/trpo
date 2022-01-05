@@ -11,6 +11,7 @@ import com.melons.financemanager.repository.UserRepository;
 import com.melons.financemanager.service.dto.ExpenseDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -35,6 +36,7 @@ public class ExpenseService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public ExpenseDto create(ExpenseDto expenseDto, String username) {
         User user = userRepository.findByUsername(username);
         expenseDto.setDate(LocalDateTime.now());
@@ -44,6 +46,7 @@ public class ExpenseService {
         expense.setCurrency(currencyRepository.save(currency));
         expense.setUser(user);
         Category category = new Category();
+        category.setName(expenseDto.getCategory());
         categoryRepository.save(category);
         expense.setCategory(category);
         return ExpenseDto.fromExpense(expenseRepository.save(expense));

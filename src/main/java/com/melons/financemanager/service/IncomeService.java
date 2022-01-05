@@ -9,10 +9,10 @@ import com.melons.financemanager.repository.UserRepository;
 import com.melons.financemanager.service.dto.IncomeDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.YearMonth;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +24,7 @@ public class IncomeService {
     private final CurrencyRepository currencyRepository;
     private final UserRepository userRepository;
 
+    @Transactional
     public IncomeDto create(IncomeDto incomeDto, String username) {
         incomeDto.setDate(LocalDateTime.now());
         Income income = incomeDto.toIncome();

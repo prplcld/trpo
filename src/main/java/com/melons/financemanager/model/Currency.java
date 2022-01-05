@@ -10,7 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "currencies")
-public class Currency {
+public class Currency{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
