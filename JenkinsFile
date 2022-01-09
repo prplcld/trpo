@@ -22,8 +22,10 @@ pipeline {
             }
         }
         stage('Sonar Qube') {
-            withSonarQubeEnv(installationName : 'sq') {
-                gradlew('clean', 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.3:sonar')
+            steps {
+                withSonarQubeEnv(installationName : 'sq') {
+                    gradlew('clean', 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.3:sonar')
+                }
             }
         }
     }
