@@ -8,26 +8,10 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                gradlew('clean', 'classes')
+                deploy adapters: [tomcat8(path: '', url: 'http://localhost:8080')], contextPath: 'finance-manager', war: 'build/libs/finance-manager.war'
             }
         }
-        stage('Unit Tests') {
-            steps {
-                gradlew('test')
-            }
-            post {
-                always {
-                    junit '**/build/test-results/test/TEST-*.xml'
-                }
-            }
-        }
-        stage('Sonar Qube') {
-            steps {
-                withSonarQubeEnv(installationName : 'sq') {
-                    gradlew('clean', 'sonar')
-                }
-            }
-        }
+
     }
 }
 
