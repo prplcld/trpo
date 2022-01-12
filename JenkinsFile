@@ -8,6 +8,7 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
+                gradlew('bootWar')
                 deploy adapters: [tomcat8(path: '', url: 'http://localhost:8080')], contextPath: 'finance-manager', war: 'build/libs/finance-manager.war'
             }
         }
